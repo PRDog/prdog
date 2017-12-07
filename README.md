@@ -20,7 +20,7 @@
         git_user: lfundaro
       - slack_user: tbillet
         git_user: tbillet
-      ```  
+      ```
   - Replace `github.secret` with your own secret code
 - Install and start ngrok
   - Follow instructions here to install: https://ngrok.com/download
@@ -32,3 +32,9 @@
   - Select Content type `application/json`
   - Paste your github secret in the secret field
   - Select "Send me everything"
+
+## Simple test flow
+- Login on github with another account than your personal one
+- Create a PR on the [testRepo](https://github.com/PRDog/testRepo) with that other account
+- Assign your personal account as reviewer for that Pull Request
+- you should receive a notification on your slack account
