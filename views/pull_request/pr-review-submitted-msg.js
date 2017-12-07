@@ -7,17 +7,17 @@ const buildReviewSubmittedMessage = (eventBody, userMap) => {
   switch (eventBody.review.state) {
     case 'changes_requested':
       title = "A change has been requested on your PR by " + reviewer
-      color = 'danger'
+      color = '#FFE033'
       content = eventBody.review.body && eventBody.review.body !== '' ? eventBody.review.body : 'No Content'
       break
     case 'approved':
       title = "Your PR has been approved by " + reviewer
-      color = 'good'
+      color = '#99FF2D'
       content = eventBody.review.body && eventBody.review.body !== '' ? eventBody.review.body : 'No Content'
       break
     case 'commented':
       title = "A comment has been left on your PR by " + reviewer
-      color = '#E8E8E8'
+      color = '#33D1FF'
       content = eventBody.review.body && eventBody.review.body !== '' ? eventBody.review.body : `<${eventBody.review.html_url}|Click here to see the comment>`
       break
   }
