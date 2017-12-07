@@ -16,9 +16,10 @@ app.use(bodyParser.urlencoded({ 'extended' : true }))
 // app.use(tokenRequestValidation) //FIXME
 
 const userMap = loadUsers('./config/users.yml')
-const pullRequestHandler = require('./controllers/prHandler.js')(userMap, slackApi)
+const { pullRequestHandler, notifier } = require('./controllers/prHandler.js')
+const prHandler = pullRequestHandler(userMap, slackApi, notifier)
 
-app.post('/pull_request', pullRequestHandler)
+app.post('/pull_request', prHandler)
 
 const REQUEST_REVIEW_NOTIFY = 'request_review_notify' //FIXME consolidate this constant with prHandler.js
 

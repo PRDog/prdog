@@ -1,0 +1,6 @@
+port: PORT
+slack:
+  apiToken: SLACK_API_TOKEN
+  reqValidationToken: SLACK_VERIFICATION_TOKEN
+github:
+  secret: GITHUB_SECRET
