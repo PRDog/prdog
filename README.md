@@ -16,12 +16,10 @@
     ```
   - config/users.yaml
       ```
-      port: 3000
-      slack:
-        apiToken: xoxp-2322910965-92696743540-284006249974-f5ad2c4a08ca95a01749538a84aadffb
-        reqValidationToken: p1fW21yQORzQUwkL6lE2vu1g
-      github:
-        secret: [replace this with any scret code]
+      - slack_user: lorenzo.fundaro
+        git_user: lfundaro
+      - slack_user: tbillet
+        git_user: tbillet
       ```  
   - Replace `github.secret` with your own secret code
 - Install and start ngrok
