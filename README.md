@@ -9,8 +9,8 @@
     ```
     port: 3000
     slack:
-      apiToken: xoxp-2322910965-92696743540-284006249974-f5ad2c4a08ca95a01749538a84aadffb
-      reqValidationToken: p1fW21yQORzQUwkL6lE2vu1g
+      apiToken: [slack token here]
+      reqValidationToken: [validation token here]
     github:
       secret: [replace this with any scret code]
     ```
