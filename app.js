@@ -61,7 +61,12 @@ const msgActionHandler = function(req, res) {
   }
   res.status(200).end()
 }
+
 app.post('/message_action', msgActionHandler)
+
+app.get('/health', function(req, res) {
+  res.status(200).send("I'm alive !")
+})
 
 app.listen(PORT, function () {
   console.log(`PRDog listening on port ${PORT}`)
