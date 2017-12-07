@@ -57,6 +57,7 @@ const pullRequestHandler = (userMap, slackApi, notifier) => (req, res) => {
       //if a new review_requested event is triggered
     notifier.notifyOnNewEvent(pullRequest.requested_reviewers, userMap, slackApi,
       pullRequest, buildPRReviewRequestedMessage)
+
     break
   case 'opened':
     break

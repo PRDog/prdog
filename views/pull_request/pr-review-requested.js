@@ -32,9 +32,15 @@ const buildPRReviewRequestedMessage = (pullRequest, userMap) => {
       'actions': [
         {
           'name': 'review action',
-          'text': 'Notify check :eyes:',
+          'text': 'Ok, Will do :ok_hand:',
           'type': 'button',
-          'value': 'pressed'
+          'value': 'confirm'
+        },
+        {
+          'name': 'review action',
+          'text': 'Sorry, not this time :no_entry:',
+          'type': 'button',
+          'value': 'reject'
         },
       ]
     }
