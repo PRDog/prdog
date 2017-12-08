@@ -8,6 +8,7 @@ const { buildSuccessfullChecksMessage } = require('../views/pull_request/pr-chec
 const { getPRAuthorWithoutSpecialCharacter } = require('../helpers/pr-utils.js')
 const { findPRComment } = require('../helpers/pr-utils.js')
 const { getPRComments } = require('../services/github-client.js')
+const config = require('config');
 const https = require('https');
 
 const prHandlerUtils = {
@@ -119,7 +120,7 @@ const prStatusHandler = (userMap, slackApi, notifier) => (req, res) => {
     const options = {
         host: 'api.github.com',
         port: 443,
-        path: "/repos/" + req.body.name + "/commits/" + req.body.sha + "/status?access_token=" + "c208ba012b0c8e363cbc3aa5c93e05c949a1ba4a",
+        path: `/repos/${req.body.name}/commits/${req.body.sha}/status${config.github.apiToken ? '?access_token=' + config.github.apiToken : ''}`,
         method: 'GET',
         headers: {'User-Agent': "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0"}
     };
