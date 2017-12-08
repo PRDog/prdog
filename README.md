@@ -1,9 +1,6 @@
 ## Bootstrap development
 - `git clone https://github.com/PRDog/prdog.git`
 - `cd prdog`
-- `npm install`
-- `sudo npm install -g nodemon`
-- Run it with `nodemon app.js`
 - create config files
   - config/development.yaml
     ```
@@ -22,6 +19,9 @@
         git_user: tbillet
       ```
   - Replace `github.secret` with your own secret code
+- `docker-compose build`
+- `docker-compose run --rm --service-ports prdog bash`
+- `nodemon app.js`
 - Install and start ngrok
   - Follow instructions here to install: https://ngrok.com/download
   - Run it with `ngrok http localhost:3000`
