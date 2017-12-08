@@ -8,7 +8,7 @@ const getPRComments = (pullRequestUrl, callback) => {
         if (!error && response.statusCode === 200) {
             return callback(eval(body));
         } else {
-            console.log('Call failed: ' + response.statusCode)
+            console.log('Call to get comments failed: ' + response.statusCode)
             return callback([])
         }
     })

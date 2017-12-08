@@ -8,9 +8,13 @@ const getPRAuthorWithoutSpecialCharacter = (pullRequest, userMap) => {
       userMap.get(pullRequest.user.login) : pullRequest.user.login
 }
 
+const getPRSender = (sender, userMap) => {
+  return userMap.has(sender) ?
+    `<@${userMap.get(sender)}>` : `${sender}`
+}
+
 const findPRComment = (data, reviewId) => {
   for (var index in data) {
-    console.log(data[index])
     if (data[index].pull_request_review_id == reviewId) {
       return data[index].body
     }
@@ -18,15 +22,14 @@ const findPRComment = (data, reviewId) => {
   return null
 }
 
-//FIXME need to refactor this getPRSender and getPRAuthor
-const getPRSender = (sender, userMap) => {
-  return userMap.has(sender) ?
-    `<@${userMap.get(sender)}>` : `${sender}`
+const hasReviewMessageContent = (content) => {
+  return content && content !== ''
 }
 
 module.exports = {
   getPRSender,
   getPRAuthor,
   getPRAuthorWithoutSpecialCharacter,
-  findPRComment
+  findPRComment,
+  hasReviewMessageContent
 }
