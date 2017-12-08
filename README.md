@@ -10,7 +10,7 @@
       reqValidationToken: [validation token here]
     github:
       secret: [replace this with any secret code]
-      apiToken: [replace with a valid github token]
+      apiToken: [replace with a valid github token]  # Comment the full line for public repositories
     ```
   - config/users.yaml
       ```
