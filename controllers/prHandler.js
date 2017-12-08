@@ -31,13 +31,10 @@ const prHandlerUtils = {
 
 const notifier = {
   notifyOnNewEvent: (receivers, userMap, slackApi, pullRequest, messageBuilder) => {
-    console.log(pullRequest)
-    console.log(receivers)
     receivers
       .map(rec => rec.login)
       .filter(prHandlerUtils.canNotifyOnSlack(userMap))
       .forEach(rec => {
-        console.log("ddd" + pullRequest)
         const slackMsg = messageBuilder(pullRequest, userMap)
         slackApi.chat.postMessage(`@${userMap.get(rec)}`, null, {'attachments': slackMsg}, prHandlerUtils.lackErrorHandler)
       })
@@ -64,7 +61,6 @@ const pullRequestHandler = (userMap, slackApi, notifier) => (req, res) => {
       //if a new review_requested event is triggered
     notifier.notifyOnNewEvent(pullRequest.requested_reviewers, userMap, slackApi,
       pullRequest, buildPRReviewRequestedMessage)
-
     break
   case 'opened':
     break
@@ -95,7 +91,6 @@ const pullRequestHandler = (userMap, slackApi, notifier) => (req, res) => {
     let prAuthor = getPRAuthorWithoutSpecialCharacter(pullRequest, userMap);
     if (prBody.review.body == null) {
       prBody.review.body = findPRComment(getPRComments(pullRequest.number), prBody.review.id);
-      console.log("passing here =>>> " + prBody.review.body)
     }
     notifier.notifyOnNewEvent([{login: prAuthor}], userMap, slackApi, prBody, buildReviewSubmittedMessage)
     break
