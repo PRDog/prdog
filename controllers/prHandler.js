@@ -2,7 +2,11 @@ const { buildPRClosedMessage } = require('../views/pull_request/pr-closed.js')
 const { buildPRReviewRequestedMessage } = require('../views/pull_request/pr-review-requested.js')
 const { buildEditedPRMessage } = require('../views/pull_request/pr-edited-msg.js')
 const { buildPRReopenedMessage } = require('../views/pull_request/pr-reopened-msg.js')
+const { buildReviewSubmittedMessage } = require('../views/pull_request/pr-review-submitted-msg.js')
 const { buildPRAssignedMessage } = require('../views/pull_request/pr-assigned-msg.js')
+const { getPRAuthorWithoutSpecialCharacter } = require('../helpers/pr-utils.js')
+const { findPRComment } = require('../helpers/pr-utils.js')
+const { getPRComments } = require('../services/github-client.js')
 const https = require('https');
 
 const prHandlerUtils = {
@@ -58,7 +62,6 @@ const pullRequestHandler = (userMap, slackApi, notifier) => (req, res) => {
       //if a new review_requested event is triggered
     notifier.notifyOnNewEvent(pullRequest.requested_reviewers, userMap, slackApi,
       pullRequest, buildPRReviewRequestedMessage)
-
     break
   case 'opened':
     break
@@ -83,7 +86,18 @@ const pullRequestHandler = (userMap, slackApi, notifier) => (req, res) => {
     }
     break
   case 'reopened':
-    notifier.notifyOnModEvent(pullRequest, userMap, slackApi, sender, buildPRReopenedMessage)
+    notifier.notifyOnModEvent(pullRequest, userMap, slackApi, sender, buildPRReopenedMessage);
+    break
+  case 'submitted':
+    let prAuthor = getPRAuthorWithoutSpecialCharacter(pullRequest, userMap);
+    if (prBody.review.body == null) {
+      getPRComments(pullRequest.url, function(data) {
+        prBody.review.body = findPRComment(data, prBody.review.id);
+        notifier.notifyOnNewEvent([{login: prAuthor}], userMap, slackApi, prBody, buildReviewSubmittedMessage)
+      })
+    } else {
+      notifier.notifyOnNewEvent([{login: prAuthor}], userMap, slackApi, prBody, buildReviewSubmittedMessage)
+    }
     break
   default:
     break
