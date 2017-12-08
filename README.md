@@ -9,7 +9,8 @@
       apiToken: [slack token here]
       reqValidationToken: [validation token here]
     github:
-      secret: [replace this with any scret code]
+      secret: [replace this with any secret code]
+      apiToken: [replace with a valid github token]  # Comment the full line for public repositories
     ```
   - config/users.yaml
       ```
@@ -19,6 +20,7 @@
         git_user: tbillet
       ```
   - Replace `github.secret` with your own secret code
+  - Replace `github.apiToken` with a valid github API token
 - `docker-compose build`
 - `docker-compose run --rm --service-ports prdog bash`
 - `nodemon app.js`
