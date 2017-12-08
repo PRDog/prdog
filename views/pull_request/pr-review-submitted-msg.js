@@ -18,7 +18,7 @@ const buildReviewSubmittedMessage = (eventBody, userMap) => {
     case 'commented':
       title = "A comment has been left on your PR by " + reviewer
       color = '#33D1FF'
-      content = eventBody.review.body && eventBody.review.body !== '' ? eventBody.review.body : `<${eventBody.review.html_url}|Click here to see the comment>`
+      content = eventBody.review.body && eventBody.review.body !== '' ? eventBody.review.body : `<${eventBody.review.html_url}|Click here to see the comments>`
       break
   }
   console.log(eventBody)

@@ -9,9 +9,8 @@ const getPRAuthorWithoutSpecialCharacter = (pullRequest, userMap) => {
 }
 
 const findPRComment = (data, reviewId) => {
-  var comments = []
   for (var index in data) {
-    if (data[index].pull_request_review_id == reviewId) {
+    if (data[index].pull_request_review_id == reviewId || true) { // remove TRUE
       return data[index].body
     }
   }
@@ -24,4 +23,9 @@ const getPRSender = (sender, userMap) => {
     `<@${userMap.get(sender)}>` : `${sender}`
 }
 
-module.exports = { getPRSender, getPRAuthor, getPRAuthorWithoutSpecialCharacter }
+module.exports = {
+  getPRSender,
+  getPRAuthor,
+  getPRAuthorWithoutSpecialCharacter,
+  findPRComment
+}
