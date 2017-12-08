@@ -29,17 +29,17 @@ const  buildPRRejectMessage = (payload) => {
       'fallback': 'PR rejected for review',
       'color': 'error',
       'title': 'Rejection',
-      'text': `${pr_title}`,
+      'text': `${payload.original_message.attachments[0].text}`,
       'mrkdwn': true,
       'fields': [
         {
           'title': 'Project',
-          'value': `${pr_project}`,
+          'value': `${payload.original_message.attachments[0].fields[0].value}`,
           'short': true
         },
         {
           'title': 'review rejected by:',
-          'value': `<@${userid}>`,
+          'value': `<${payload.original_message.attachments[0].fields[1].value}>`,
           'short': true
         }
       ]

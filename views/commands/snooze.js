@@ -2,7 +2,7 @@ const buildSnoozeOutput = () => {
   return [
     {
       'color': 'warning',
-      'title': 'PRs you follow',
+      'title': 'The following will be snoozed for 15min',
       'mrkdwn': true,
       'fields': [
         {

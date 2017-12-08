@@ -3,14 +3,13 @@ const { parseSlackEvent } = require('../helpers/slack-event-parser.js')
 const config = require('config')
 const GITHUB_SECRET = config.get('github.secret')
 const SLACK_VERIFICATION_TOKEN = config.get('slack.reqValidationToken')
-
-const githubSecret = require('crypto').createHmac('sha1', GITHUB_SECRET).digest('hex')
+const { createHmac } = require('crypto')
 
 const tokenRequestValidation = (req, res, next) => {
+  const hmac = createHmac('sha1', GITHUB_SECRET)
   if (req.get('User-Agent').match(/^GitHub-Hookshot/)) {
-    console.log(req.get('X-Hub-Signature'))
-    console.log(githubSecret)
-    if (!secureCompare(req.get('X-Hub-Signature'), githubSecret)) {
+    const digest = 'sha1=' + hmac.update(JSON.stringify(req.body)).digest('hex')
+    if (!secureCompare(req.get('X-Hub-Signature'), digest)) {
       console.log('Unauthorized access from Github')
       res.status(401).end()
     } else {
