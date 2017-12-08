@@ -3,6 +3,7 @@ const { buildPRReviewRequestedMessage } = require('../views/pull_request/pr-revi
 const { buildEditedPRMessage } = require('../views/pull_request/pr-edited-msg.js')
 const { buildPRReopenedMessage } = require('../views/pull_request/pr-reopened-msg.js')
 const { buildPRAssignedMessage } = require('../views/pull_request/pr-assigned-msg.js')
+const https = require('https');
 
 const prHandlerUtils = {
   canNotifyOnSlack: userMap => user => {
@@ -88,10 +89,60 @@ const pullRequestHandler = (userMap, slackApi, notifier) => (req, res) => {
     break
   }
   res.status(200).end()
-}
+};
+
+const prStatusHandler = (userMap, slackApi, notifier) => (req, res) => {
+    const HTTP_OK = 200;
+    const HTTP_NO_BODY = 204;
+    const status = req.body.status;
+
+    if (status !== "success") {
+        res.status(HTTP_NO_BODY).end();
+    }
+
+    const options = {
+        host: 'api.github.com',
+        port: 443,
+        path: "/repos/" + req.body.name + "/commits/" + req.body.sha + "/status",
+        method: 'GET',
+        headers: {'User-Agent': "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0"}
+    };
+
+    console.debug("Calling: https://" + options.host + options.path);
+
+    https.get(options, (resp) => {
+        let data = '';
+
+        resp.on('data', (chunk) => {
+            data += chunk;
+        });
+
+        resp.on('end', () => {
+            const responseBody = JSON.parse(data);
+            const statuses = responseBody.statuses;
+            let statusSuccess = true;
+            for(var i = 0; i < statuses.length; i++) {
+                if (statuses[i].state !== "success") {
+                  statusSuccess = false;
+                }
+            }
+
+            if (statusSuccess) {
+              console.log("notifying");
+              //TODO notify
+            } else {
+              console.log("not notifying");
+            }
+
+        });
+    });
+
+    res.status(HTTP_OK).end();
+};
 
 module.exports = {
   pullRequestHandler,
+  prStatusHandler,
   notifier,
   prHandlerUtils
-}
+};
