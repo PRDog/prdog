@@ -5,6 +5,7 @@
   - config/development.yaml
     ```
     port: 3000
+    users: './config/users.yml'
     slack:
       apiToken: [slack token here]
       reqValidationToken: [validation token here]
