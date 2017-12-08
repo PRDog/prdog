@@ -2,7 +2,9 @@ const { buildPRClosedMessage } = require('../views/pull_request/pr-closed.js')
 const { buildPRReviewRequestedMessage } = require('../views/pull_request/pr-review-requested.js')
 const { buildEditedPRMessage } = require('../views/pull_request/pr-edited-msg.js')
 const { buildPRReopenedMessage } = require('../views/pull_request/pr-reopened-msg.js')
+const { buildReviewSubmittedMessage } = require('../views/pull_request/pr-review-submitted-msg.js')
 const { buildPRAssignedMessage } = require('../views/pull_request/pr-assigned-msg.js')
+const { getPRAuthorWithoutSpecialCharacter } = require('../helpers/pr-utils.js')
 
 const prHandlerUtils = {
   canNotifyOnSlack: userMap => user => {
@@ -82,7 +84,11 @@ const pullRequestHandler = (userMap, slackApi, notifier) => (req, res) => {
     }
     break
   case 'reopened':
-    notifier.notifyOnModEvent(pullRequest, userMap, slackApi, sender, buildPRReopenedMessage)
+    notifier.notifyOnModEvent(pullRequest, userMap, slackApi, sender, buildPRReopenedMessage);
+    break
+  case 'submitted':
+    let prAuthor = getPRAuthorWithoutSpecialCharacter(pullRequest, userMap);
+    notifier.notifyOnNewEvent([{login: prAuthor}], userMap, slackApi, prBody, buildReviewSubmittedMessage)
     break
   default:
     break
