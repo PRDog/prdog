@@ -90,9 +90,13 @@ const pullRequestHandler = (userMap, slackApi, notifier) => (req, res) => {
   case 'submitted':
     let prAuthor = getPRAuthorWithoutSpecialCharacter(pullRequest, userMap);
     if (prBody.review.body == null) {
-      prBody.review.body = findPRComment(getPRComments(pullRequest.number), prBody.review.id);
+      getPRComments(pullRequest.url, function(data) {
+        prBody.review.body = findPRComment(data, prBody.review.id);
+        notifier.notifyOnNewEvent([{login: prAuthor}], userMap, slackApi, prBody, buildReviewSubmittedMessage)
+      })
+    } else {
+      notifier.notifyOnNewEvent([{login: prAuthor}], userMap, slackApi, prBody, buildReviewSubmittedMessage)
     }
-    notifier.notifyOnNewEvent([{login: prAuthor}], userMap, slackApi, prBody, buildReviewSubmittedMessage)
     break
   default:
     break

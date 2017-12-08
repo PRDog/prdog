@@ -10,7 +10,8 @@ const getPRAuthorWithoutSpecialCharacter = (pullRequest, userMap) => {
 
 const findPRComment = (data, reviewId) => {
   for (var index in data) {
-    if (data[index].pull_request_review_id == reviewId || true) { // remove TRUE
+    console.log(data[index])
+    if (data[index].pull_request_review_id == reviewId) {
       return data[index].body
     }
   }
