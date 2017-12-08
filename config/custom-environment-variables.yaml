@@ -5,3 +5,4 @@ slack:
   reqValidationToken: SLACK_VERIFICATION_TOKEN
 github:
   secret: GITHUB_SECRET
+  apiToken: GITHUB_API_TOKEN

@@ -1,5 +1,9 @@
+const config = require('config')
 const request = require('request').defaults({
-    headers: {'User-Agent': 'pr-dog'}
+    headers: {
+        'User-Agent': 'pr-dog',
+        'Authorization': `token ${config.get('github.apiToken')}`
+    }
 })
 
 const getPRComments = (pullRequestUrl, callback) => {
