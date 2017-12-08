@@ -64,6 +64,10 @@ const msgActionHandler = function(req, res) {
 
 app.post('/message_action', msgActionHandler)
 
+app.post('/command', function(req, res) {
+  res.status(200).send("Hi there !")
+})
+
 app.get('/health', function(req, res) {
   res.status(200).send("I'm alive !")
 })
