@@ -16,7 +16,7 @@ const  buildPRConfirmMessage = (payload) => {
         },
         {
           'title': 'Review confirmed by',
-          'value': `${payload.original_message.attachments[0].fields[1].value}`,
+          'value': `<@${payload.user.name}>`,
           'short': true
         }
       ]
@@ -39,7 +39,7 @@ const  buildPRRejectMessage = (payload) => {
         },
         {
           'title': 'Review rejected by:',
-          'value': `${payload.original_message.attachments[0].fields[1].value}`,
+          'value': `<@${payload.user.name}>`,
           'short': true
         }
       ]
