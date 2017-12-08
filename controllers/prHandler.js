@@ -91,19 +91,13 @@ const pullRequestHandler = (userMap, slackApi, notifier) => (req, res) => {
     notifier.notifyOnModEvent(pullRequest, userMap, slackApi, sender, buildPRReopenedMessage);
     break
   case 'submitted':
-    console.log('before prAuthor')
     let prAuthor = getPRAuthorWithoutSpecialCharacter(pullRequest, userMap);
-    console.log('after getPrAuthor')
     if (prBody.review.body == null) {
       getPRComments(pullRequest.url, function(data) {
-        console.log('get pr comments')
         prBody.review.body = findPRComment(data, prBody.review.id);
-        console.log(`PRauthor = ${prAuthor}`)
         notifier.notifyOnNewEvent([{login: prAuthor}], userMap, slackApi, prBody, buildReviewSubmittedMessage)
       })
     } else {
-      console.log('else getprcomments')
-      console.log(`PRauthor = ${prAuthor}`)
       notifier.notifyOnNewEvent([{login: prAuthor}], userMap, slackApi, prBody, buildReviewSubmittedMessage)
     }
     break
