@@ -4,6 +4,7 @@
   "description": "SlackApp to help you track Github activity",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "mocha",
     "watch-test": "mocha --watch",
     "nibble": "eslint-nibble .",

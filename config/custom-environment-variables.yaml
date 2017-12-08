@@ -1,4 +1,5 @@
 port: PORT
+users: USERS
 slack:
   apiToken: SLACK_API_TOKEN
   reqValidationToken: SLACK_VERIFICATION_TOKEN
