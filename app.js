@@ -17,10 +17,10 @@ const slackApi = new WebClient(SLACK_API_TOKEN)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ 'extended' : true }))
-//app.use(tokenRequestValidation) //FIXME
+app.use(tokenRequestValidation)
 
-const userMap = loadUsers(config.users || './config/users.yml')
-const { pullRequestHandler, notifier, prStatusHandler } = require('./controllers/prHandler.js')
+const userMap = loadUsers(config.users)
+const { pullRequestHandler, prStatusHandler, notifier } = require('./controllers/prHandler.js')
 const prHandler = pullRequestHandler(userMap, slackApi, notifier)
 const statusHandler = prStatusHandler(userMap, slackApi, notifier)
 

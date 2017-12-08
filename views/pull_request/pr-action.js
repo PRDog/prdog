@@ -3,7 +3,7 @@ const {getPRSender} = require('../../helpers/pr-utils.js')
 const  buildPRConfirmMessage = (payload) => {
   return [
     {
-      'fallback': 'PR confrmed for review',
+      'fallback': 'PR confirmed for review',
       'color': 'good',
       'title': 'Confirmation',
       'text': `${payload.original_message.attachments[0].text}`,
@@ -15,7 +15,7 @@ const  buildPRConfirmMessage = (payload) => {
           'short': true
         },
         {
-          'title': 'review confirmed by',
+          'title': 'Review confirmed by',
           'value': `${payload.original_message.attachments[0].fields[1].value}`,
           'short': true
         }
@@ -29,17 +29,17 @@ const  buildPRRejectMessage = (payload) => {
       'fallback': 'PR rejected for review',
       'color': 'error',
       'title': 'Rejection',
-      'text': `${pr_title}`,
+      'text': `${payload.original_message.attachments[0].text}`,
       'mrkdwn': true,
       'fields': [
         {
           'title': 'Project',
-          'value': `${pr_project}`,
+          'value': `${payload.original_message.attachments[0].fields[0].value}`,
           'short': true
         },
         {
-          'title': 'review rejected by:',
-          'value': `<@${userid}>`,
+          'title': 'Review rejected by:',
+          'value': `${payload.original_message.attachments[0].fields[1].value}`,
           'short': true
         }
       ]
