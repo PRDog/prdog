@@ -36,7 +36,6 @@ const notifier = {
   notifyOnNewEvent: (receivers, userMap, slackApi, pullRequest, messageBuilder) => {
     receivers
       .map(rec => rec.login)
-      .map(rec => rec.login || rec)
       .filter(prHandlerUtils.canNotifyOnSlack(userMap))
       .forEach(rec => {
         const slackMsg = messageBuilder(pullRequest, userMap)
@@ -146,7 +145,7 @@ const prStatusHandler = (userMap, slackApi, notifier) => (req, res) => {
 
             if (statusSuccess) {
                 let committer = req.body.commit.committer;
-                notifier.notifyOnNewEvent([{login: committer}], userMap, slackApi, req.body, buildSuccessfullChecksMessage)
+                notifier.notifyOnNewEvent([{login: committer.login}], userMap, slackApi, req.body, buildSuccessfullChecksMessage)
             }
 
             res.status(HTTP_OK).end();
