@@ -33,7 +33,7 @@ const buildReviewSubmittedMessage = (eventBody, userMap) => {
       'fields': [
         {
           'title': 'Pull Request',
-          'value': `<${eventBody.review.html_url}|${eventBody.pull_request.title}>`,
+          'value': `<${eventBody.review.html_url}|${eventBody.pull_request.title} #${eventBody.pull_request.number}>`,
           'short': true
         }
       ],
