@@ -6,6 +6,12 @@ const SLACK_VERIFICATION_TOKEN = config.get('slack.reqValidationToken')
 const { createHmac } = require('crypto')
 
 const tokenRequestValidation = (req, res, next) => {
+  // whitelist health
+  if (req.url.match(/health$/)) {
+    next()
+    return
+  }
+
   const hmac = createHmac('sha1', GITHUB_SECRET)
   if (req.get('User-Agent').match(/^GitHub-Hookshot/)) {
     const digest = 'sha1=' + hmac.update(JSON.stringify(req.body)).digest('hex')
