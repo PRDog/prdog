@@ -36,6 +36,7 @@ const notifier = {
       .filter(prHandlerUtils.canNotifyOnSlack(userMap))
       .forEach(rec => {
         const slackMsg = messageBuilder(pullRequest, userMap)
+        console.log("Sending slack message to " + userMap.get(rec))
         slackApi.chat.postMessage(`@${userMap.get(rec)}`, null, {'attachments': slackMsg}, prHandlerUtils.lackErrorHandler)
       })
   },
@@ -45,6 +46,7 @@ const notifier = {
       .filter(user => user != sender)
       .forEach(user => {
         const slackMsg = messageBuilder(pullRequest, userMap, sender)
+        console.log("Sending slack message to " + userMap.get(user))
         slackApi.chat.postMessage(`@${userMap.get(user)}`, null, {'attachments': slackMsg}, prHandlerUtils.lackErrorHandler)
       })
   }
@@ -55,6 +57,7 @@ const pullRequestHandler = (userMap, slackApi, notifier) => (req, res) => {
   const pullRequest = prBody.pull_request
   const action = prBody.action
   const sender = prBody.sender.login
+  console.log(`Handling hook event: action=${action} sender=${sender}`)
   switch (action) {
   case 'review_requested':
       //FIXME this will notify all the requested reviewers again
