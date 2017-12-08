@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ 'extended' : true }))
 app.use(tokenRequestValidation)
 
-const userMap = loadUsers(config.users)
+const userMap = loadUsers(config.users || './config/users.yml')
 const { pullRequestHandler, prStatusHandler, notifier } = require('./controllers/prHandler.js')
 const prHandler = pullRequestHandler(userMap, slackApi, notifier)
 const statusHandler = prStatusHandler(userMap, slackApi, notifier)
