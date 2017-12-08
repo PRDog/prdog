@@ -4,8 +4,7 @@ const getPRAuthor = (pullRequest, userMap) => {
 }
 
 const getPRAuthorWithoutSpecialCharacter = (pullRequest, userMap) => {
-  return userMap.has(pullRequest.user.login) ?
-      userMap.get(pullRequest.user.login) : pullRequest.user.login
+  return pullRequest.user.login
 }
 
 const getPRSender = (sender, userMap) => {
