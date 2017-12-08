@@ -17,7 +17,7 @@ const slackApi = new WebClient(SLACK_API_TOKEN)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ 'extended' : true }))
-app.use(tokenRequestValidation)
+//app.use(tokenRequestValidation)
 
 const userMap = loadUsers(config.users)
 const { pullRequestHandler, notifier } = require('./controllers/prHandler.js')
