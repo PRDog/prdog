@@ -27,14 +27,15 @@
 - `nodemon app.js`
 - Install and start ngrok
   - Follow instructions here to install: https://ngrok.com/download
-  - Run it with `ngrok http localhost:3000`
-- Add a new webhook in github's test repo
+  - Run it with `ngrok http localhost:3000` **twice**
+- Add 2 new webhooks in github's test repo
   - Go to https://github.com/PRDog/testRepo/settings/hooks/new
   - In Payload URL, copy the http URL displayed in ngrok and append `/pull_request` at the end
     - ex: `http://af6c5b45.ngrok.io/pull_request`
   - Select Content type `application/json`
   - Paste your github secret in the secret field
   - Select "Send me everything"
+  - in the second Webhook: In Payload URL, copy the http URL displayed in ngrok and append `/pr_statuses` at the end select _Status_ only
 
 ## Simple test flow
 - Login on github with another account than your personal one
