@@ -9,6 +9,7 @@ const config = require('config')
 const { buildPRConfirmMessage, buildPRRejectMessage } = require('./views/pull_request/pr-action.js')
 const { buildListCommandOutput } = require('./views/commands/list.js')
 const { buildSnoozeOutput } = require('./views/commands/snooze.js')
+const { buildStatsForMe } = require('./views/commands/stats.js')
 
 const SLACK_API_TOKEN = config.get('slack.apiToken')
 const PORT = config.get('port')
@@ -79,6 +80,11 @@ app.post('/command', function(req, res) {
     const captured = regex.exec(commandText)
     slackApi.chat.postMessage(req.body.user_id, `Will not bother you for ${captured[1]}` , null)
     res.status(200).end()
+  } else if (commandText.match(/stats\s*$/)) {
+    slackApi.chat.postMessage(req.body.user_id, null , {'attachments': buildStatsForMe()})
+    res.status(200).end()
+  } else {
+    res.status(200).send("I'm sorry, I don't understand that\n¯\_(ツ)_/¯")
   }
 })
 
