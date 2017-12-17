@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/travis/PRDog/prdog.svg?label=master)](https://travis-ci.org/PRDog/prdog.svg?branch=master)
+[![Build Status](https://api.travis-ci.org/PRDog/prdog.svg?branch=master)](https://travis-ci.org/PRDog/prdog)
 
 ## What's PRDog ?
 
