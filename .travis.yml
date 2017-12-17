@@ -7,7 +7,4 @@ before_install:
 script:
   - docker run -it -e GITHUB_API_TOKEN=12345 prdog/prdog npm test
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
-    docker push prdog/prdog:latest;
-    fi
+  - scripts/docker_push.sh
