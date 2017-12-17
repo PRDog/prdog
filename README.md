@@ -1,3 +1,5 @@
+[![Build Status](https://img.shields.io/travis/PRDog/prdog.svg?label=master)](https://travis-ci.org/PRDog/prdog.svg?branch=master)
+
 ## What's PRDog ?
 
 It's a tool to help you manage Github Pull Request workflow through Slack.
