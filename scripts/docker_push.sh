@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -xe
 
-if [ "$TRAVIS_BRANCH" != "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-  echo "Not on master branch, skipping latest release"
+if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+  echo "Not on PR, skipping docker push"
   exit 0
 fi
 
