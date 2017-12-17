@@ -1,10 +1,9 @@
 sudo: required
-language: node_js
 services:
   - docker
 before_install:
   - docker build -t prdog/prdog .
 script:
-  - docker run -it prdog/prdog -c "npm test"
+  - docker run -it prdog/prdog npm test
 # env:
 #   - GITHUB_API_TOKEN=12345
