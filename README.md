@@ -47,9 +47,9 @@ personally and when it matters.
     - Get a slack api token and Request Validation Token.
   - Create a Github Secret and get an API token (with read-only permissions).
 - `docker-compose build`
-- `docker-compose -e PORT=3000 -e USERS=./config/users.yml -e SLACK_API_TOKEN=slack-api-token
+- `docker-compose run -e PORT=3000 -e USERS=./config/users.yml -e SLACK_API_TOKEN=slack-api-token
       -e SLACK_VERIFICATION_TOKEN=verification-token -e GITHUB_SECRET=gh_secret
-      -e GITHUB_API_TOKEN=gh_token run --rm --service-ports prdog bash`
+      -e GITHUB_API_TOKEN=gh_token --rm --service-ports prdog bash`
 - `npm install`
 - `nodemon app.js`
 - Install and start ngrok
