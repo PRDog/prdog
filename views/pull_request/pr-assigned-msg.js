@@ -1,5 +1,5 @@
 const ellipsize = require('ellipsize')
-const { getPRAuthor } = require('../../helpers/pr-utils.js')
+const { getPRAuthor } = require('../../lib/pr-utils.js')
 
 const buildPRAssignedMessage = (pullRequest, userMap) => {
   return [

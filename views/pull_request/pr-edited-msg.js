@@ -1,4 +1,4 @@
-const { getPRSender } = require('../../helpers/pr-utils.js')
+const { getPRSender } = require('../../lib/pr-utils.js')
 const ellipsize = require('ellipsize')
 
 const buildEditedPRMessage = (pullRequest, userMap, sender) => {

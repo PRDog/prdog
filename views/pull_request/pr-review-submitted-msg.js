@@ -1,5 +1,5 @@
 const ellipsize = require('ellipsize')
-const { hasReviewMessageContent } = require('../../helpers/pr-utils.js')
+const { hasReviewMessageContent } = require('../../lib/pr-utils.js')
 
 const buildReviewSubmittedMessage = (eventBody, userMap) => {
   let sender = eventBody.review.user.login

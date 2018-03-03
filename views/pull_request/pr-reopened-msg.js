@@ -1,4 +1,4 @@
-const { getPRSender } = require('../../helpers/pr-utils.js')
+const { getPRSender } = require('../../lib/pr-utils.js')
 
 const buildPRReopenedMessage = (pullRequest, userMap, sender) => {
   return [

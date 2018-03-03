@@ -1,4 +1,4 @@
-const {getPRSender} = require('../../helpers/pr-utils.js')
+const {getPRSender} = require('./lib/pr-utils.js');
 
 const  buildPRConfirmMessage = (payload) => {
   return [
@@ -21,8 +21,8 @@ const  buildPRConfirmMessage = (payload) => {
         }
       ]
     }
-  ]
-}
+  ];
+};
 const  buildPRRejectMessage = (payload) => {
   return [
     {
@@ -44,7 +44,7 @@ const  buildPRRejectMessage = (payload) => {
         }
       ]
     }
-  ]
-}
+  ];
+};
 
-module.exports = { buildPRRejectMessage, buildPRConfirmMessage  }
+module.exports = { buildPRRejectMessage, buildPRConfirmMessage  };
