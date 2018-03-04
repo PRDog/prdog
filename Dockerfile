@@ -12,4 +12,4 @@ RUN apk update && \
 COPY . .
 EXPOSE 8080
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
