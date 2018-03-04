@@ -1,56 +1,46 @@
-require('dotenv').config();
 const _ = require('lodash');
 const logger = require('./lib/logger.js');
-const { userMap } = require('./lib/user-loader.js');
-const slackApi = require('./lib/slack_api.js');
-const { getPRAuthor } = require('./lib/pr_utils.js');
+const userMap = require('./lib/user-loader.js').loadUsers();
+const { sendSlackMessage } = require('./lib/slack_api.js')
+const { formatUser } = require('./lib/pr_utils.js');
 const ellipsize = require('ellipsize');
 const Mustache = require('mustache');
-const { templates } = require('./lib/templates.js');
-
-const canNotifyOnSlack = user => {
-    return userMap.has(user);
-};
-
-const sendSlackMessage = async (to, slackMsg) => {
-  logger.info("Sending slack message to " + userMap.get(to));
-  try {
-    await slackApi.chat.postMessage(`@${userMap.get(to)}`, null, {'attachments': slackMsg});
-  } catch (err) {
-    logger.error(err);
-  }
-};
+const templates = require('./lib/templates.js').loadTemplates();
 
 const notifyReview = (pullRequest, action) => {
     pullRequest.requested_reviewers
       .map(rev => rev.login)
-      .filter(canNotifyOnSlack)
+      .filter(user => userMap.has(user))
       .forEach(rev => {
-        const slackMsg = Mustache.render(templates.get('pr_' + action), { pullRequest: pullRequest,
-          prAuthor: getPRAuthor(pullRequest, userMap),
-          prDescription: ellipsize(pullRequest.body, 200)});
+        const slackMsg = Mustache.render(templates.get(['pr', action].join('_')), {
+          pullRequest: pullRequest,
+          prAuthor: formatUser(pullRequest.user.login, userMap),
+          prDescription: ellipsize(pullRequest.body, 200)
+        });
         logger.info("Sending slack message to " + userMap.get(rev));
-        sendSlackMessage(rev, slackMsg);
+        sendSlackMessage(userMap.get(rev), slackMsg);
       });
     };
 
 const notifyClosed = (pullRequest, sender, action) => {
   var reviewers = pullRequest.requested_reviewers.map(r => r.login);
   if (sender !== pullRequest.user.login) {
-    reviewers = reviewers.concat([sender]);
+    reviewers.push(sender);
   }
   let extra;
   if (pullRequest.merged) {
-    extra = '_merged';
+    extra = 'merged';
   } else {
-    extra = '_not_merged';
+    extra = 'not_merged';
   }
   reviewers
-    .filter(canNotifyOnSlack)
+    .filter(user => userMap.has(user))
     .forEach(rev => {
-      const slackMsg = Mustache.render(templates.get('pr_' + action + extra), { pullRequest: pullRequest,
-        closedBy: sender });
-        sendSlackMessage(rev, slackMsg);
+      const slackMsg = Mustache.render(templates.get(['pr', action, extra].join('_')), {
+        pullRequest: pullRequest,
+        closedBy: sender 
+      });
+        sendSlackMessage(userMap.get(rev), slackMsg);
     });
 };
 
@@ -67,10 +57,8 @@ const pullRequestHandler = (req, res) => {
   case 'closed':
     notifyClosed(pullRequest, sender, action);
     break;
-  case 'review_request_removed':
-    break;
   default:
-    break;
+      break;
   }
 };
 

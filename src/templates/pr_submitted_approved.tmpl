@@ -1,0 +1,21 @@
+[
+    {
+        "fallback": "Your PR has been approved by {{sender}}",
+        "pretext": "Your PR has been approved by {{sender}}",
+        "color": "#99FF2D",
+        "mrkdwn": true,
+        "fields": [
+          {
+            "title": "Repository",
+            "value": "<{{{repo.html_url}}}|{{{repo.full_name}}}>",
+            "short": true
+          },
+          {
+            "title": "Pull Request",
+            "value": "<{{{review.html_url}}}|{{{pullRequest.title}}}/#{{pullRequest.number}}>",
+            "short": true
+          }
+        ],
+        "attachment_type": "default"
+    }
+]

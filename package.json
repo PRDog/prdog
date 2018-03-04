@@ -8,10 +8,9 @@
     "url": "git://github.com/prdog/prdog.git"
   },
   "scripts": {
-    "start": "node app.js",
-    "test": "mocha",
-    "watch-test": "mocha --watch",
-    "nibble": "eslint-nibble .",
+    "start": "node src/app.js",
+    "start-watch": "nodemon src/app.js",
+    "nibble": "eslint-nibble ./src",
     "eslint-fix": "eslint --help"
   },
   "author": "PRDog Organization",

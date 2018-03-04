@@ -1,5 +1,5 @@
 const parseSlackEvent = (req) => {
-  return JSON.parse(unescape(req.body.payload))
-}
+  return JSON.parse(unescape(req.body.payload));
+};
 
-module.exports = { parseSlackEvent }
+module.exports = { parseSlackEvent };

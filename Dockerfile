@@ -1,9 +1,12 @@
-FROM node:carbon
+FROM node:carbon-alpine
 
 WORKDIR /prdog
 COPY package*.json ./
-RUN npm install && \
-    npm install -g nodemon && \
+RUN apk update && \
+    apk add yarn && \
+    yarn install && \
+    yarn global add nodemon && \
+    apk add wget && \
     wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_1.2.1_amd64 && \
     chmod +x /usr/bin/dumb-init
 COPY . .

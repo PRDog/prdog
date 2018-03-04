@@ -1,18 +1,18 @@
 [
   {
-    "fallback": "PR closed and merged",
+    "fallback": "PR merged",
     "color": "warning",
-    "title": "Closed & Merged",
+    "title": "PR merged",
     "text": "{{pullRequest.title}}",
     "mrkdwn": true,
     "fields": [
       {
-        "title": "Project",
+        "title": "PR",
         "value": "<{{{pullRequest.html_url}}}|{{{pullRequest.head.repo.full_name}}}/#{{pullRequest.number}}>",
         "short": true
       },
       {
-        "title": "Closed by",
+        "title": "Merged by",
         "value": "{{closedBy}}",
         "short": true
       }

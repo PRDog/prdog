@@ -1,14 +1,13 @@
 require('dotenv').config();
-const express = require('express');
-const app = express();
+const app = require('express')();
 const bodyParser = require('body-parser');
 const logger = require('./lib/logger');
-const { tokenRequestValidation } = require('./lib/token-validation.js');
+const { tokenRequestValidation } = require('./lib/token-validation');
 const PORT = process.env.PORT;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ 'extended' : false }));
-// app.use(tokenRequestValidation);
+app.use(tokenRequestValidation);
 
 const { ghWebhookHandler } = require('./ghWebhookHandler.js');
 
