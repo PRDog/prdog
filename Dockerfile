@@ -1,7 +1,7 @@
 FROM node:carbon-alpine
 
 WORKDIR /prdog
-COPY package*.json ./
+COPY package*.json yarn.lock ./
 RUN apk update && \
     apk add yarn && \
     yarn install && \

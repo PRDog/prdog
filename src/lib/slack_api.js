@@ -20,4 +20,12 @@ const sendSlackMessage = (to, slackMsg) => {
     }
 };
 
-module.exports = { sendSlackMessage };
+const updateMessage = (payload, slackMsg) => {
+    try {
+        client.chat.update(payload.original_message.ts, payload.channel.id, null, {'attachments': slackMsg});
+    } catch (e) {
+        logger.error(`Could not update slack message: ${e}`);
+    }
+}
+
+module.exports = { sendSlackMessage, updateMessage };
