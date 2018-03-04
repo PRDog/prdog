@@ -1,0 +1,38 @@
+[{
+	"fallback": "You were requested for review",
+	"color": "warning",
+	"title": "Review request",
+	"text": "{{pullRequest.title}}",
+	"mrkdwn": true,
+	"fields": [{
+			"title": "PR",
+  			"value": "<{{{pullRequest.html_url}}}|{{{pullRequest.head.repo.full_name}}}/#{{pullRequest.number}}>",
+			"short": true
+		},
+		{
+			"title": "Requested from",
+			"value": "{{prAuthor}}",
+			"short": true
+		},
+		{
+			"title": "Description",
+			"value": "{{prDescription}}",
+			"short": false
+		}
+	],
+	"callback_id": "{{callbackId}}",
+	"attachment_type": "default",
+	"actions": [{
+			"name": "review action",
+			"text": "Ok, Will do :ok_hand:",
+			"type": "button",
+			"value": "confirm"
+		},
+		{
+			"name": "review action",
+			"text": "Sorry, not this time :no_entry:",
+			"type": "button",
+			"value": "reject"
+		}
+	]
+}]

@@ -1,4 +1,8 @@
 config/*
-package-lock.json
 node_modules
 !config/custom-environment-variables.yaml
+users.yml
+gh_draft/
+.env
+TODO-*
+.idea

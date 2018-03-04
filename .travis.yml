@@ -2,9 +2,5 @@ sudo: required
 language: generic
 services:
   - docker
-before_install:
-  - docker build -t prdog/prdog .
 script:
-  - docker run -it -e GITHUB_API_TOKEN=12345 prdog/prdog npm test
-after_success:
-  - scripts/docker_push.sh
+  - echo tests

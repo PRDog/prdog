@@ -1,0 +1,21 @@
+[
+  {
+    "fallback": "PR closed",
+    "color": "danger",
+    "title": "Closed",
+    "text": "{{pullRequest.title}}",
+    "mrkdwn": true,
+    "fields": [
+      {
+        "title": "PR",
+        "value": "<{{{pullRequest.html_url}}}|{{{pullRequest.head.repo.full_name}}}/#{{pullRequest.number}}>",
+        "short": true
+      },
+      {
+        "title": "Closed by",
+        "value": "{{closedBy}}",
+        "short": true
+      }
+    ]
+  }
+];

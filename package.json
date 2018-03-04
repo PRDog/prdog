@@ -3,23 +3,31 @@
   "version": "1.0.0",
   "description": "SlackApp to help you track Github activity",
   "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/prdog/prdog.git"
+  },
   "scripts": {
-    "start": "node app.js",
-    "test": "mocha",
-    "watch-test": "mocha --watch",
-    "nibble": "eslint-nibble .",
+    "start": "node src/app.js",
+    "start-watch": "nodemon src/app.js",
+    "nibble": "eslint-nibble ./src",
     "eslint-fix": "eslint --help"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "PRDog Organization",
+  "license": "MIT",
   "dependencies": {
-    "@slack/client": "^3.12.0",
-    "body-parser": "^1.17.2",
-    "config": "^1.26.2",
+    "@slack/client": "^3.15.0",
+    "@slack/interactive-messages": "^0.2.0",
+    "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
     "ellipsize": "0.0.3",
-    "express": "^4.15.4",
+    "express": "^4.16.2",
+    "glob": "^7.1.2",
+    "lodash": "^4.17.4",
+    "mustache": "^2.3.0",
     "secure-compare": "^3.0.1",
-    "yamljs": "^0.2.10"
+    "winston": "^2.4.0",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "chai": "^4.1.1",

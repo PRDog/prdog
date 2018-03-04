@@ -1,0 +1,21 @@
+[
+    {
+        "fallback": "Review submitted by {{sender}}",
+        "pretext": "Review submitted by {{sender}}",
+        "color": "#FFE033",
+        "mrkdwn": true,
+        "fields": [
+          {
+            "title": "Repository",
+            "value": "<{{{repo.html_url}}}|{{{repo.full_name}}}>",
+            "short": true
+          },
+          {
+            "title": "Pull Request",
+            "value": "<{{{review.html_url}}}|{{{pullRequest.title}}}/#{{pullRequest.number}}>",
+            "short": true
+          }
+        ],
+        "attachment_type": "default"
+    }
+]
