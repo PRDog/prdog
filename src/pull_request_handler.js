@@ -60,6 +60,7 @@ const pullRequestHandler = (req, res) => {
             notifyClosed(pullRequest, sender, action);
             break;
         default:
+            logger.info(`action not supported ${action}`);
             break;
     }
 };
