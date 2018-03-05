@@ -19,7 +19,6 @@ const notifyReview = (pullRequest, action) => {
                 prDescription: ellipsize(pullRequest.body, 200),
                 callbackId: actions.requestReviewNotify,
             });
-            logger.info("Sending slack message to " + userMap.get(rev));
             sendSlackMessage(userMap.get(rev), slackMsg);
         });
 };
@@ -60,7 +59,6 @@ const pullRequestHandler = (req, res) => {
             notifyClosed(pullRequest, sender, action);
             break;
         default:
-            logger.info(`action not supported ${action}`);
             break;
     }
 };

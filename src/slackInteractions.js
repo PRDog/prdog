@@ -6,7 +6,7 @@ const templates = require('./lib/templates.js').loadTemplates();
 
 const actions = {
     requestReviewNotify: 'REQUEST_REVIEW_NOTIFY',
-}
+};
 
 slackInteractions.action(actions.requestReviewNotify, async (payload) => {
     const replacement = payload.original_message.attachments[0];
