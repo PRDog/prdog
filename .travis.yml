@@ -3,4 +3,4 @@ language: generic
 services:
   - docker
 script:
-  - echo tests
+  - npm run test
