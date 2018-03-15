@@ -1,6 +1,6 @@
 const {createMessageAdapter} = require('@slack/interactive-messages');
 const slackInteractions = createMessageAdapter(process.env.SLACK_VERIFICATION_TOKEN);
-const { updateMessage, sendSlackMessage } = require('./lib/slack_api');
+const { updateMessage, sendSlackMessage } = require('./lib/slack_api_utils');
 const Mustache = require('mustache');
 const templates = require('./lib/templates.js').loadTemplates();
 

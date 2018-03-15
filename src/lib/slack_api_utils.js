@@ -1,15 +1,6 @@
 require('dotenv').config();
-const WebClient = require('@slack/client').WebClient;
+const client = (require('./slack_client_factory.js')).getSlackApiClient();
 const logger = require('./logger');
-
-let client;
-
-try {
-    client = new WebClient(process.env.SLACK_API_TOKEN);
-} catch (e) {
-    logger.error(`Could not initialize slack client: ${e}`);
-    process.exit(1);
-}
 
 const sendSlackMessage = async (to, slackMsg) => {
     logger.info("Sending slack message to " + to);
@@ -26,6 +17,6 @@ const updateMessage = async (payload, slackMsg) => {
     } catch (e) {
         logger.error(`Could not update slack message: ${e}`);
     }
-}
+};
 
 module.exports = { sendSlackMessage, updateMessage };
