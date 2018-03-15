@@ -1,5 +1,5 @@
 const userMap = require('./lib/user-loader.js').loadUsers();
-const { sendSlackMessage } = require('./lib/slack_api.js');
+const { sendSlackMessage } = require('./lib/slack_api_utils.js');
 const { formatUser } = require('./lib/pr_utils.js');
 const Mustache = require('mustache');
 const templates = require('./lib/templates.js').loadTemplates();
