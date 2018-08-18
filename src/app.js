@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./lib/user_loader').loadUsers();
 const app = require('express')();
 const bodyParser = require('body-parser');
 const logger = require('./lib/logger');

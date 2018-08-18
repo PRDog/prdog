@@ -11,9 +11,9 @@ const tokenRequestValidation = (req, res, next) => {
     return;
   }
 
-  const hmac = createHmac('sha1', process.env.GITHUB_SECRET);
   const user_agent = req.get('User-Agent');
   if (user_agent.match(/^GitHub-Hookshot/)) {
+    const hmac = createHmac('sha1', process.env.GITHUB_SECRET);
     const digest = 'sha1=' + hmac.update(JSON.stringify(req.body)).digest('hex');
     if (!secureCompare(req.get('X-Hub-Signature'), digest)) {
       logger.error('Unauthorized access from Github');
