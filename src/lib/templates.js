@@ -7,8 +7,7 @@ let templates;
 const loadTemplates = () => {
   try {
     if (!templates) {
-      templates = glob.sync("src/templates/*.tmpl")
-      .reduce((templates, file) => {
+      templates = glob.sync('src/templates/*.tmpl').reduce((templates, file) => {
         const key = file.replace(/src\/templates\//, '').replace(/.tmpl/, '');
         templates.set(key, fs.readFileSync(file, 'utf8'));
         return templates;

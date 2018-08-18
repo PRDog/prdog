@@ -6,13 +6,21 @@
     "mocha": true
   },
   "extends": [
-    "eslint:recommended"
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "prettier"
   ],
   "parserOptions": {
     "ecmaVersion": 2017,
     "sourceType": "module"
   },
   "rules": {
-    "semi": ["error", "always"],
+    "no-console": 0,
+    "prettier/prettier": ["error", {
+      "singleQuote": true,
+      "printWidth": 100
+    }]
   }
 }

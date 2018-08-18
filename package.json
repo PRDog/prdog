@@ -11,13 +11,13 @@
     "start": "node src/app.js",
     "start-watch": "nodemon src/app.js",
     "test": "mocha --recursive",
-    "nibble": "eslint-nibble ./src",
-    "eslint-fix": "eslint --help"
+    "lint": "eslint .",
+    "lint-fix": "npm run lint -- --fix"
   },
   "author": "PRDog Organization",
   "license": "MIT",
   "dependencies": {
-    "@slack/client": "^3.15.0",
+    "@slack/client": "4.4.0",
     "@slack/interactive-messages": "^0.2.0",
     "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
@@ -28,15 +28,18 @@
     "mustache": "^2.3.0",
     "node-cache": "^4.2.0",
     "secure-compare": "^3.0.1",
+    "verror": "^1.10.0",
     "winston": "^2.4.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "chai": "^4.1.1",
     "eslint": "^3.19.0",
-    "eslint-nibble": "^3.1.2",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-prettier": "^2.6.2",
     "mocha": "^3.5.0",
     "mockery": "^2.1.0",
+    "prettier": "^1.14.2",
     "sinon": "^3.2.1"
   }
 }

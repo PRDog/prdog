@@ -1,4 +1,4 @@
-const parseSlackEvent = (req) => {
+const parseSlackEvent = req => {
   return JSON.parse(unescape(req.body.payload));
 };
 

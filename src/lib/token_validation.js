@@ -1,6 +1,6 @@
 require('dotenv').config();
 const secureCompare = require('secure-compare');
-const { parseSlackEvent } = require('./slack-event-parser.js');
+const { parseSlackEvent } = require('./slack_event_parser.js');
 const { createHmac } = require('crypto');
 const logger = require('./logger.js');
 
